@@ -2,10 +2,19 @@
   My App
   <span fxFlex></span>
   <div>
-    <button mat-icon-button routerLink="/main/people">
+    <button mat-button routerLink="/auth/login">
+      <mat-icon>input</mat-icon>
+      Entrar
+    </button>
+    <button mat-button routerLink="/auth/register">
+      <mat-icon>person_add</mat-icon>
+      Cadastrar-se
+    </button>
+
+    <button mat-button routerLink="/main/people">
       <mat-icon>home</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/main/products">
+    <button mat-button routerLink="/main/products">
       <mat-icon>shop</mat-icon>
     </button>
   </div>
