@@ -39,14 +39,15 @@ export class AuthService {
 
   checkTokenValidation(): Observable<boolean> {
     return this.http.get<User>(`${this.url}/user`).pipe(
-      tap((user: User) => {
-        if (user) {
+      tap((u: User) => {
+        if (u) {
+          localStorage.setItem('token', u.token);
           this.subjLoggedIn$.next(true);
-          this.subjUser$.next(user);
+          this.subjUser$.next(u);
         }
       }),
-      map((user: User) => !!user),
-      catchError((error) => {
+      map((u: User) => (u ? true : false)),
+      catchError((err) => {
         this.logout();
         return of(false);
       })

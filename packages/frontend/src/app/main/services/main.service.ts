@@ -2,7 +2,7 @@ import { Product } from './../interfaces/product';
 import { Person } from './../interfaces/person';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { catchError, tap } from 'rxjs/operators';
 
@@ -17,21 +17,14 @@ export class MainService {
 
   getPeople(): Observable<Person[]> {
     return this.http.get<Person[]>(`${this.url}/people`).pipe(
-      tap((p) => console.log(p)),
-      catchError(this.errorHandler)
+      catchError((error) => of(error))
     );
   }
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.url}/products`).pipe(
-      tap((p) => console.log(p)),
-      catchError(this.errorHandler)
+      catchError((error) => of(error))
     );
-  }
-
-  errorHandler(error: HttpErrorResponse) {
-    console.log('caiu aqui', error);
-    return Observable.throw(error.message || 'server error.');
   }
 
 }

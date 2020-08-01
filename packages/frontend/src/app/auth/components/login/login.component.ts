@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     'password': ['', [Validators.required, Validators.minLength(6)]],
   });
 
+  loading = false;
+
   constructor(
     private formBuider: FormBuilder,
     private authService: AuthService,
@@ -28,15 +30,17 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     const credentials = this.loginForm.value;
+    this.loading = true;
     this.authService.login(credentials)
       .subscribe(
         user => {
-          console.log(user);
           this.notify(`Logged in successfuly. Welcome ${user.firstname}!`);
           this.router.navigateByUrl('/');
+          this.loading = false;
         },
         err => {
           this.notify(err.message);
+          this.loading = false;
         }
       )
   }
