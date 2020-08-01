@@ -30,6 +30,7 @@ export class MainService {
   }
 
   errorHandler(error: HttpErrorResponse) {
+    console.log('caiu aqui', error);
     return Observable.throw(error.message || 'server error.');
   }
 
