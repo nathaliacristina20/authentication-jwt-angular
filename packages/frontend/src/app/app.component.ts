@@ -2,6 +2,7 @@ import { User } from './auth/interfaces/user';
 import { AuthService } from './auth/services/auth.service';
 import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,15 @@ export class AppComponent {
   user$: Observable<User>;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ){
     this.authenticated$ = this.authService.isAuthenticated();
     this.user$ = this.authService.getUser();
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigateByUrl('/auth/login');
   }
 }
