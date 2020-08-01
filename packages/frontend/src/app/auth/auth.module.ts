@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { AuthInterceptor } from './auth.interceptor';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './../material.module';
 
@@ -21,4 +22,15 @@ import { RegisterComponent } from './components/register/register.component';
     ReactiveFormsModule
   ]
 })
-export class AuthModule { }
+export class AuthModule {
+
+  static forRoot(): ModuleWithProviders<any> {
+    return {
+      ngModule: AuthModule,
+      providers: [
+        AuthInterceptor
+      ]
+    }
+  }
+
+}
